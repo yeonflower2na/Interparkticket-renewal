@@ -3,6 +3,13 @@ fetch("../header/header.html")
   .then((res) => res.text())
   .then((data) => {
     document.querySelector(".header-include").innerHTML = data;
+    document.querySelectorAll('img').forEach(img => {
+      // 현재 이미지의 src 속성값에서 파일 이름만 추출
+      const src = img.getAttribute('src'); 
+      if (src && !src.startsWith('../')) { // 이미 '../'가 붙어있지 않은 경우만 처리
+        img.src = `../${src}`;
+      }
+    });
     let resInfo = document.querySelector(".res-hdr-top-right > .res-info");
     let resMenu = document.querySelector(".res-hdr-top-right > .res-menu");
     let sideMenuContainer = document.querySelector(".side-menu-container");
